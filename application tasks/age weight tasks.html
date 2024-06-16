@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utility Converters</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .container {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mb-4">Utility Converters</h1>
+
+      <!-- Currency Converter -->
+      <div class="mb-4">
+        <h2>Currency Converter</h2>
+        <div class="form-group">
+          <label for="currencyInput">Enter amount in INR:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="currencyInput"
+            placeholder="INR"
+          />
+        </div>
+        <button class="btn btn-primary" onclick="convertCurrency()">
+          Convert
+        </button>
+        <p id="currencyResult"></p>
+      </div>
+
+      <!-- Age Calculator -->
+      <div class="mb-4">
+        <h2>Age Calculator</h2>
+        <div class="form-group">
+          <label for="dobInput">Select Date of Birth:</label>
+          <input type="date" class="form-control" id="dobInput" />
+        </div>
+        <button class="btn btn-primary" onclick="calculateAge()">
+          Check Age
+        </button>
+        <p id="ageResult"></p>
+      </div>
+
+      <!-- Temperature Converter -->
+      <div class="mb-4">
+        <h2>Temperature Converter</h2>
+        <div class="form-group">
+          <label for="tempInput">Enter temperature in Celsius:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="tempInput"
+            placeholder="Celsius"
+          />
+        </div>
+        <button class="btn btn-primary" onclick="convertTemperature()">
+          Convert
+        </button>
+        <p id="temperatureResult"></p>
+      </div>
+
+      <!-- Percentage Calculator -->
+      <div class="mb-4">
+        <h2>Percentage Calculator</h2>
+        <div class="form-group">
+          <label for="totalMarksInput">Enter Total Marks:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="totalMarksInput"
+            placeholder="Total Marks"
+          />
+        </div>
+        <div class="form-group">
+          <label for="obtainedMarksInput">Enter Obtained Marks:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="obtainedMarksInput"
+            placeholder="Obtained Marks"
+          />
+        </div>
+        <button class="btn btn-primary" onclick="calculatePercentage()">
+          Calculate Percentage
+        </button>
+        <p id="percentageResult"></p>
+      </div>
+
+      <!-- Weight Converter -->
+      <div class="mb-4">
+        <h2>Weight Converter</h2>
+        <div class="form-group">
+          <label for="weightInput">Enter weight in grams:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="weightInput"
+            placeholder="Grams"
+          />
+        </div>
+        <button class="btn btn-primary" onclick="convertWeight()">
+          Convert
+        </button>
+        <p id="weightResult"></p>
+      </div>
+    </div>
+
+    <script>
+      function convertCurrency() {
+        const inr = parseFloat(document.getElementById("currencyInput").value);
+        const usd = inr * 0.012; // Example conversion rate
+        const dinar = inr * 0.0034; // Example conversion rate
+        const euro = inr * 0.011; // Example conversion rate
+        document.getElementById("currencyResult").innerHTML = `
+                USD: ${usd.toFixed(2)}, Dinar: ${dinar.toFixed(
+          2
+        )}, Euro: ${euro.toFixed(2)}
+            `;
+      }
+
+      function calculateAge() {
+        const dob = new Date(document.getElementById("dobInput").value);
+        const diff = Date.now() - dob.getTime();
+        const ageDate = new Date(diff);
+        const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+        document.getElementById("ageResult").innerText = `Age: ${age} years`;
+      }
+
+      function convertTemperature() {
+        const celsius = parseFloat(document.getElementById("tempInput").value);
+        const fahrenheit = (celsius * 9) / 5 + 32;
+        document.getElementById(
+          "temperatureResult"
+        ).innerText = `Fahrenheit: ${fahrenheit.toFixed(2)}`;
+      }
+
+      function calculatePercentage() {
+        const totalMarks = parseFloat(
+          document.getElementById("totalMarksInput").value
+        );
+        const obtainedMarks = parseFloat(
+          document.getElementById("obtainedMarksInput").value
+        );
+        const percentage = (obtainedMarks / totalMarks) * 100;
+        document.getElementById(
+          "percentageResult"
+        ).innerText = `Percentage: ${percentage.toFixed(2)}%`;
+      }
+
+      function convertWeight() {
+        const grams = parseFloat(document.getElementById("weightInput").value);
+        const kg = grams / 1000;
+        const lbs = grams * 0.00220462;
+        const tons = grams / 1e6;
+        const pound = grams / 453.59237;
+        document.getElementById("weightResult").innerHTML = `
+                Kilograms: ${kg.toFixed(2)}, Pounds: ${lbs.toFixed(
+          2
+        )}, Tons: ${tons.toFixed(6)}, Pound: ${pound.toFixed(2)}
+            `;
+      }
+    </script>
+  </body>
+</html>

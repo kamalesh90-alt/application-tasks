@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utility Converters and Calculators</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Utility Converters and Calculators</h1>
+        
+        <!-- Currency Converter -->
+        <div class="mb-4">
+            <h3>Currency Converter</h3>
+            <div class="form-group">
+                <label for="currencyAmount">Amount in INR:</label>
+                <input type="number" class="form-control" id="currencyAmount">
+            </div>
+            <button class="btn btn-primary" onclick="convertCurrency()">Convert</button>
+            <div class="result">
+                <p id="usdResult"></p>
+                <p id="dinarResult"></p>
+                <p id="euroResult"></p>
+            </div>
+        </div>
+        
+        <!-- Age Calculator -->
+        <div class="mb-4">
+            <h3>Age Calculator</h3>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" class="form-control" id="dob">
+            </div>
+            <button class="btn btn-primary" onclick="calculateAge()">Calculate Age</button>
+            <div class="result">
+                <p id="ageResult"></p>
+            </div>
+        </div>
+        
+        <!-- Temperature Converter -->
+        <div class="mb-4">
+            <h3>Temperature Converter</h3>
+            <div class="form-group">
+                <label for="celsius">Temperature in Celsius:</label>
+                <input type="number" class="form-control" id="celsius">
+            </div>
+            <button class="btn btn-primary" onclick="convertTemperature()">Convert</button>
+            <div class="result">
+                <p id="fahrenheitResult"></p>
+            </div>
+        </div>
+        
+        <!-- Percentage Calculator -->
+        <div class="mb-4">
+            <h3>Percentage Calculator</h3>
+            <div class="form-group">
+                <label for="totalMarks">Total Marks:</label>
+                <input type="number" class="form-control" id="totalMarks">
+            </div>
+            <div class="form-group">
+                <label for="obtainedMarks">Obtained Marks:</label>
+                <input type="number" class="form-control" id="obtainedMarks">
+            </div>
+            <button class="btn btn-primary" onclick="calculatePercentage()">Calculate Percentage</button>
+            <div class="result">
+                <p id="percentageResult"></p>
+            </div>
+        </div>
+        
+        <!-- Weight Converter -->
+        <div class="mb-4">
+            <h3>Weight Converter</h3>
+            <div class="form-group">
+                <label for="grams">Weight in Grams:</label>
+                <input type="number" class="form-control" id="grams">
+            </div>
+            <button class="btn btn-primary" onclick="convertWeight()">Convert</button>
+            <div class="result">
+                <p id="kgResult"></p>
+                <p id="lbsResult"></p>
+                <p id="tonsResult"></p>
+                <p id="poundResult"></p>
+            </div>
+        </div>
+        
+        <!-- Basic Calculator -->
+        <div class="mb-4">
+            <h3>Basic Calculator</h3>
+            <div class="form-group">
+                <label for="number1">Number 1:</label>
+                <input type="number" class="form-control" id="number1">
+            </div>
+            <div class="form-group">
+                <label for="number2">Number 2:</label>
+                <input type="number" class="form-control" id="number2">
+            </div>
+            <button class="btn btn-primary" onclick="calculate()">Calculate</button>
+            <div class="result">
+                <p id="addResult"></p>
+                <p id="subtractResult"></p>
+                <p id="multiplyResult"></p>
+                <p id="divideResult"></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // script.js
+
+function convertCurrency() {
+    const inr = document.getElementById('currencyAmount').value;
+    const usd = inr * 0.012;
+    const dinar = inr * 0.0036;
+    const euro = inr * 0.011;
+
+    document.getElementById('usdResult').innerText = `USD: ${usd.toFixed(2)}`;
+    document.getElementById('dinarResult').innerText = `Dinar: ${dinar.toFixed(2)}`;
+    document.getElementById('euroResult').innerText = `Euro: ${euro.toFixed(2)}`;
+}
+
+function calculateAge() {
+    const dob = new Date(document.getElementById('dob').value);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDifference = today.getMonth() - dob.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+        age--;
+    }
+    document.getElementById('ageResult').innerText = `Age: ${age}`;
+}
+
+function convertTemperature() {
+    const celsius = document.getElementById('celsius').value;
+    const fahrenheit = (celsius * 9/5) + 32;
+    document.getElementById('fahrenheitResult').innerText = `Fahrenheit: ${fahrenheit.toFixed(2)}`;
+}
+
+function calculatePercentage() {
+    const totalMarks = document.getElementById('totalMarks').value;
+    const obtainedMarks = document.getElementById('obtainedMarks').value;
+    const percentage = (obtainedMarks / totalMarks) * 100;
+    document.getElementById('percentageResult').innerText = `Percentage: ${percentage.toFixed(2)}%`;
+}
+
+function convertWeight() {
+    const grams = document.getElementById('grams').value;
+    const kg = grams / 1000;
+    const lbs = grams / 453.592;
+    const tons = grams / 1e+6;
+    const pounds = grams / 453.592;
+
+    document.getElementById('kgResult').innerText = `Kilograms: ${kg.toFixed(2)}`;
+    document.getElementById('lbsResult').innerText = `Pounds: ${lbs.toFixed(2)}`;
+    document.getElementById('tonsResult').innerText = `Tons: ${tons.toFixed(6)}`;
+    document.getElementById('poundResult').innerText = `Pounds: ${pounds.toFixed(2)}`;
+}
+
+function calculate() {
+    const num1 = parseFloat(document.getElementById('number1').value);
+    const num2 = parseFloat(document.getElementById('number2').value);
+
+    const add = num1 + num2;
+    const subtract = num1 - num2;
+    const multiply = num1 * num2;
+    const divide = num1 / num2;
+
+    document.getElementById('addResult').innerText = `Addition: ${add}`;
+    document.getElementById('subtractResult').innerText = `Subtraction: ${subtract}`;
+    document.getElementById('multiplyResult').innerText = `Multiplication: ${multiply}`;
+    document.getElementById('divideResult').innerText = `Division: ${divide.toFixed(2)}`;
+}
+
+    </script>
+</body>
+</html>

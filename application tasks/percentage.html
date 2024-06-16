@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utility Tools</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Currency Converter</h2>
+    <div class="form-group">
+      <label for="amount">Amount in INR:</label>
+      <input type="number" id="amount" class="form-control" placeholder="Enter amount in INR">
+    </div>
+    <div class="form-group">
+      <label for="currency">Convert to:</label>
+      <select id="currency" class="form-control">
+        <option value="usd">US Dollar</option>
+        <option value="dinar">Dinar</option>
+        <option value="euro">Euro</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" onclick="convertCurrency()">Convert</button>
+    <p id="convertedAmount" class="mt-3"></p>
+
+    <h2>Age Calculator</h2>
+    <div class="form-group">
+      <label for="dob">Select Date of Birth:</label>
+      <input type="date" id="dob" class="form-control">
+    </div>
+    <button class="btn btn-primary" onclick="calculateAge()">Calculate Age</button>
+    <p id="ageResult" class="mt-3"></p>
+
+    <h2>Temperature Converter</h2>
+    <div class="form-group">
+      <label for="celsius">Enter Temperature in Celsius:</label>
+      <input type="number" id="celsius" class="form-control" placeholder="Enter temperature in Celsius">
+    </div>
+    <button class="btn btn-primary" onclick="convertTemperature()">Convert to Fahrenheit</button>
+    <p id="fahrenheitResult" class="mt-3"></p>
+
+    <h2>Percentage Calculator</h2>
+    <div class="form-group">
+      <label for="totalMarks">Enter Total Marks:</label>
+      <input type="number" id="totalMarks" class="form-control" placeholder="Enter total marks">
+    </div>
+    <div class="form-group">
+      <label for="obtainedMarks">Enter Obtained Marks:</label>
+      <input type="number" id="obtainedMarks" class="form-control" placeholder="Enter obtained marks">
+    </div>
+    <button class="btn btn-primary" onclick="calculatePercentage()">Calculate Percentage</button>
+    <p id="percentageResult" class="mt-3"></p>
+  </div>
+
+  <script>
+    function convertCurrency() {
+      const amount = document.getElementById('amount').value;
+      const currency = document.getElementById('currency').value;
+      let rate;
+
+      switch(currency) {
+        case 'usd':
+          rate = 0.013; // Example conversion rate
+          break;
+        case 'dinar':
+          rate = 0.0037; // Example conversion rate
+          break;
+        case 'euro':
+          rate = 0.011; // Example conversion rate
+          break;
+        default:
+          rate = 0;
+      }
+
+      const convertedAmount = amount * rate;
+      document.getElementById('convertedAmount').innerText = `Converted Amount: ${convertedAmount.toFixed(2)} ${currency.toUpperCase()}`;
+    }
+
+    function calculateAge() {
+      const dob = new Date(document.getElementById('dob').value);
+      const diffMs = Date.now() - dob.getTime();
+      const ageDate = new Date(diffMs);
+      const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+      document.getElementById('ageResult').innerText = `Your Age: ${age} years`;
+    }
+
+    function convertTemperature() {
+      const celsius = document.getElementById('celsius').value;
+      const fahrenheit = (celsius * 9/5) + 32;
+
+      document.getElementById('fahrenheitResult').innerText = `Temperature in Fahrenheit: ${fahrenheit.toFixed(2)} °F`;
+    }
+
+    function calculatePercentage() {
+      const totalMarks = document.getElementById('totalMarks').value;
+      const obtainedMarks = document.getElementById('obtainedMarks').value;
+      const percentage = (obtainedMarks / totalMarks) * 100;
+
+      document.getElementById('percentageResult').innerText = `Percentage: ${percentage.toFixed(2)}%`;
+    }
+  </script>
+</body>
+</html>
